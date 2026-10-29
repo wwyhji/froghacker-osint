@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "froghacker-osint"
+version = "0.1.0"
+description = "蛙客开源情报(OSINT)开源版 — 27 源聚合 + 关联图谱 + 身份画像 + 并发缓存贴限"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "FrogHacker (wwyhji)" }]
+keywords = ["osint", "intelligence", "recon", "whois", "dns", "graph", "security"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = ["requests>=2.28"]
+
+[project.optional-dependencies]
+dns = ["dnspython>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/wwyhji/froghacker-osint"
+
+[tool.setuptools.packages.find]
+include = ["osint*"]
