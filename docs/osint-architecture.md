@@ -250,11 +250,13 @@ _network_profile(ip)
 | 模块 | 职责 | 关键设计 |
 |------|------|---------|
 | `http_client.py` | HTTP 层 | **thread-local** `requests.Session`（并发下不共享单例）；`safe_get_json/text/post` 缺 key/异常返回 None 不抛 |
+| `stealth_session.py` | 礼貌采集（可选） | `StealthSession`（drop-in requests.Session）：UA 轮换 + per-domain 延迟 + 429/503 退避 + `Retry-After` + WAF/CAPTCHA 检测不绕过 |
 | `cache.py` | TTL 缓存 | `TTLCache` 内存不落盘（敏感数据）；key=`(synonym_key, source)`；默认 300s / `OSINT_CACHE_TTL`；下沉到 `SourceAdapter.cached_collect`（collect 与 identity 直调共享） |
 | `rate_limiter.py` | 贴限 | `TokenBucket` + 模块级单例 `RateLimiter`，跨 collect/identity 共享额度；`rate_limit=(requests, seconds)` 声明式 |
 | `reporter.py` | 进度/格式化 | `Progress` 单行刷新到 **stderr**（保 JSON stdout 干净）；`format_artifacts` 统一格式 |
 
-> 主仓库的 `StealthSession`（反爬对抗）已剥离，换标准 `requests.Session`。
+> 默认 HTTP 层用标准 `requests.Session`。可选礼貌采集层见 `stealth_session.py`（UA 轮换/退避/检测不绕过），
+> 对抗部分（ProxyPool 代理池、BrowserStealth 指纹伪装）未开源，见 [MANIFEST.md](../MANIFEST.md)。
 
 ---
 

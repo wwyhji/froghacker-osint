@@ -62,6 +62,12 @@ _SYMBOL_MAP = {
     # -- identity --
     "identity_profile": ("osint.identity", "identity_profile"),
     "IdentityProfile": ("osint.identity", "IdentityProfile"),
+    # -- stealth (polite collection) --
+    "StealthSession": ("osint.stealth_session", "StealthSession"),
+    "HeaderSpoofer": ("osint.header_spoofer", "HeaderSpoofer"),
+    "BrowserProfile": ("osint.header_spoofer", "BrowserProfile"),
+    "ChallengeDetector": ("osint.challenge_detector", "ChallengeDetector"),
+    "ChallengeDetected": ("osint.challenge_detector", "ChallengeDetected"),
     # -- live --
     "live_intel": ("osint.live", "live_intel"),
     "format_live": ("osint.live", "format_live"),
@@ -90,6 +96,7 @@ __all__ = [
     "expand_graph", "render_graph",
     "run_agent", "OsintAgentResult", "verify_claims",
     "identity_profile", "IdentityProfile",
+    "StealthSession", "HeaderSpoofer", "BrowserProfile", "ChallengeDetector", "ChallengeDetected",
     "live_intel", "format_live", "diff_live", "run_live", "render_live", "LiveIntelResult",
     "FlightState", "Earthquake", "EonetEvent", "MalwareC2",
     "SpaceWeather", "SatelliteTle",

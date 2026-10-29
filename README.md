@@ -54,6 +54,25 @@ github_api, blockchain, chainabuse, reddit, phone, bgpview, macvendor
 **付费（需 API key）**：hibp, hunter, shodan, abuseipdb, securitytrails, censys, vt,
 greynoise, leakix, dehashed, intelx, etherscan —— key 通过环境变量注入（如 `SHODAN_API_KEY`）。
 
+## 礼貌采集（可选）
+
+`StealthSession` 提供 drop-in `requests.Session` 的**礼貌采集层（非对抗）**：
+
+- 标准浏览器 UA / Sec-CH-* 头轮换（避免默认 python-requests UA 被拦）
+- per-domain 随机延迟 + 429/503 指数退避 + 尊重 `Retry-After`
+- WAF/CAPTCHA **检测**（`ChallengeDetector`）——只识别不绕过，默认返回原始响应
+
+```python
+from osint import StealthSession, ChallengeDetector
+
+s = StealthSession(profile="chrome_win")
+resp = s.get("https://target.com/page")
+if ChallengeDetector.is_blocked(resp):
+    print("被 WAF/验证码拦截，已如实返回，不绕过")
+```
+
+对抗部分（代理池轮换规避封禁、浏览器指纹伪装）未开源，保留在主仓库，详见 [MANIFEST.md](MANIFEST.md)。
+
 ## 架构
 
 四层架构：入口/编排 → 采集 → 图引擎 → 基础设施。详见 [docs/osint-architecture.md](docs/osint-architecture.md)。
