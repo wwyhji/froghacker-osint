@@ -7,7 +7,7 @@
 - **数据模型** `artifacts.py`：`OsintArtifact` / `OsintGraph` / `ENTITY_TYPES` / `normalize` / `synonym_key`（同义撞击）
 - **基础设施**：`cache.py`（TTL 缓存）、`rate_limiter.py`（per-source token bucket 贴限）、`reporter.py`（进度/格式化）、`http_client.py`（thread-local requests.Session）
 - **图引擎**：`graph_engine.py`（detect_type / extract_entities / expand BFS 多跳）、`graph_viz.py`（自包含 HTML 渲染）
-- **26 源适配器** `sources/`：crtsh / wayback / dns / whois / emailrep / hackertarget / urlscan / otx / github_api / blockchain / chainabuse / reddit / phone(简化) / bgpview / macvendor + 12 付费源（需 key）
+- **27 源适配器** `sources/`：crtsh / wayback / dns / whois / emailrep / hackertarget / urlscan / otx / github_api / blockchain / chainabuse / reddit / phone(简化) / bgpview / macvendor + 12 付费源（需 key）
 - **能力模块**：email_lookup / username_search / domain_intel / social_lookup / breach_check / company_lookup / metasearch / person_search / crypto_search / verify / report / live / viz / gatherer
 - **编排**：runner / osint_agent（confidence 排序）/ identity（网络·地理·域名画像）
 
